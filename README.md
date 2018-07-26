@@ -5,7 +5,7 @@
 
 ## Curriculum
 
-> [1주차]
+ [1주차]
 	 	
    	| Subject | Practice | Apps | Note |
 	|:-------:|:--------:|:----:|:----:|
