@@ -11,7 +11,7 @@
 | Subject | Practice | Apps | Note |
 |:-------:|:--------:|:----:|:----:|
 |Object Oriented Programming|-|-|-|
-|Variable and Function|[Tuple and Volume]|-|[변수와 함수의 이해]|
+|Variable and Function|[Tuple and Volume]|-|[변수와 함수의 이해](https://github.com/BroxigarSaurfang/iOS-dev/blob/master/stuedy/1st.md)|
 |Control Flow|[if문]|-|if 조건문|
 |Control Flow|[switch문]|-|switch 조건문|
 	
@@ -21,9 +21,8 @@
 	
 | Subject | Practice | Apps | Note |
 |:-------:|:--------:|:----:|:----:|
-|Collection and Control Flow(Loops)|[Loops]|[Baseball Game]|조합|
 |Optional|[Practice]|-|[옵셔널]|
-|Class and Object|-|[Vending Machine]|[클래스와 객체]|
+|Class and Object|-|[Vending Machine]|[클래스와 객체](https://github.com/BroxigarSaurfang/iOS-dev/blob/master/stuedy/CHAPTER8.md)|
 |Inheritance|-|[PocketMonster]|[상속]|
 	
 	
