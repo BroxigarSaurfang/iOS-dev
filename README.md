@@ -5,9 +5,8 @@
 
 ## Curriculum
 
-* [1주차]
-	
-   > 	
+> [1주차]
+	 	
    	| Subject | Practice | Apps | Note |
 	|:-------:|:--------:|:----:|:----:|
 	|Object Oriented Programming|-|-|-|
@@ -15,18 +14,18 @@
 	|Control Flow|[if문]|-|if 조건문|
 	|Control Flow|[switch문]|-|switch 조건문|
 	
-* [2주차]
+> [2주차]
 
-	>| Subject | Practice | Apps | Note |
+	| Subject | Practice | Apps | Note |
 	|:-------:|:--------:|:----:|:----:|
 	|Collection and Control Flow(Loops)|[Loops]|[Baseball Game]|조합|
 	|Optional|[Practice]|-|[옵셔널]|
 	|Class and Object|-|[Vending Machine]|[클래스와 객체]|
 	|Inheritance|-|[PocketMonster]|[상속]|
 	
-* [3주차]
+> [3주차]
 
-	>| Subject | Practice | Apps | Note |
+	| Subject | Practice | Apps | Note |
 	|:-------:|:--------:|:----:|:----:|
 	|UIClass|[Practice]|-|[UI]|
 	|Application Life Cycle & Access Control|-|-|[Life Cycle]|
@@ -35,25 +34,25 @@
 	|AutoLayOut|[Practice]|-|[오토레이아웃]|
 	|Deldgate|-|-|[델리게이트]|
 	
-* [4주차]
+> [4주차]
 
-	>| Subject | Practice | Apps | Note |
+	| Subject | Practice | Apps | Note |
 	|:-------:|:--------:|:----:|:----:|
 	|UIScrollView|[Practice]|-|[스크롤 뷰]|
 	|UIAlertController|-|-|-|
 	|UITableView|[Practice]|-|[]|
 
-* [5주차]
+> [5주차]
 
-	>| Subject | Practice | Apps | Note |
+	| Subject | Practice | Apps | Note |
 	|:-------:|:--------:|:----:|:----:|
 	|property|[Practice]|-||
 	|Enumeration|-|[Practice]|[열거형]|
 	|Error Handling|-|-|-|
 
-* [7주차]
+> [7주차]
 
-	>| Subject | Practice | Apps | Note |
+	| Subject | Practice | Apps | Note |
 	|:-------:|:--------:|:----:|:----:|
 	|Data Saving|[Practice]|[]|[pList로 자료 관리]|
 	|Date|[]|-|[Date, DateFormatter, UIDatePicker]|
@@ -62,9 +61,10 @@
 	|Closure|[Practice]|-|[클로저]|
 	|JSON|-|-|[JSON]|
 	
-* [8주차]
 
-	>| Subject | Practice | Apps | Note |
+> [8주차]
+
+	| Subject | Practice | Apps | Note |
 	|:-------:|:--------:|:----:|:----:|
 	|Timer|[Practice]|-|[타이머, DatePicker]|
 	|Closure|[Practice]|-|[map, filter, reduce]|
@@ -72,9 +72,9 @@
 	|UIGestureRecognzer & Animation|[Practice]|-|-|
 	|MapKit|[Practice]|-|-|
 
-* [9주차]
+> [9주차]
 
-	>| Subject | Practice | Apps | Note |
+	| Subject | Practice | Apps | Note |
 	|:-------:|:--------:|:----:|:----:|
 	|UICollectionView|[Practice]|-|[콜렉션뷰]|
 	|Thread|[Practice]|-|[쓰레드]|
