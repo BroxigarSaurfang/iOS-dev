@@ -8,12 +8,12 @@
 > [1주차]
 	 	
    	
-	| Subject | Practice | Apps | Note |
-	|:-------:|:--------:|:----:|:----:|
-	|Object Oriented Programming|-|-|-|
-	|Variable and Function|[Tuple and Volume]|-|[변수와 함수의 이해]|
-	|Control Flow|[if문]|-|if 조건문|
-	|Control Flow|[switch문]|-|switch 조건문|
+| Subject | Practice | Apps | Note |
+|:-------:|:--------:|:----:|:----:|
+|Object Oriented Programming|-|-|-|
+|Variable and Function|[Tuple and Volume]|-|[변수와 함수의 이해]|
+|Control Flow|[if문]|-|if 조건문|
+|Control Flow|[switch문]|-|switch 조건문|
 	
 	
 > [2주차]
