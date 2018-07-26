@@ -19,77 +19,77 @@
 > [2주차]
 
 	
-	| Subject | Practice | Apps | Note |
-	|:-------:|:--------:|:----:|:----:|
-	|Collection and Control Flow(Loops)|[Loops]|[Baseball Game]|조합|
-	|Optional|[Practice]|-|[옵셔널]|
-	|Class and Object|-|[Vending Machine]|[클래스와 객체]|
-	|Inheritance|-|[PocketMonster]|[상속]|
+| Subject | Practice | Apps | Note |
+|:-------:|:--------:|:----:|:----:|
+|Collection and Control Flow(Loops)|[Loops]|[Baseball Game]|조합|
+|Optional|[Practice]|-|[옵셔널]|
+|Class and Object|-|[Vending Machine]|[클래스와 객체]|
+|Inheritance|-|[PocketMonster]|[상속]|
 	
 	
 > [3주차]
 
 	
-	| Subject | Practice | Apps | Note |
-	|:-------:|:--------:|:----:|:----:|
-	|UIClass|[Practice]|-|[UI]|
-	|Application Life Cycle & Access Control|-|-|[Life Cycle]|
-	|Recursion|-|-|[재귀합수]|
-	|Class & Structures|[Practice]|-|[클래스와 구조체]|
-	|AutoLayOut|[Practice]|-|[오토레이아웃]|
-	|Deldgate|-|-|[델리게이트]|
+| Subject | Practice | Apps | Note |
+|:-------:|:--------:|:----:|:----:|
+|UIClass|[Practice]|-|[UI]|
+|Application Life Cycle & Access Control|-|-|[Life Cycle]|
+|Recursion|-|-|[재귀합수]|
+|Class & Structures|[Practice]|-|[클래스와 구조체]|
+|AutoLayOut|[Practice]|-|[오토레이아웃]|
+|Deldgate|-|-|[델리게이트]|
 	
 	
 > [4주차]
 
 	
-	| Subject | Practice | Apps | Note |
-	|:-------:|:--------:|:----:|:----:|
-	|UIScrollView|[Practice]|-|[스크롤 뷰]|
-	|UIAlertController|-|-|-|
-	|UITableView|[Practice]|-|[]|
+| Subject | Practice | Apps | Note |
+|:-------:|:--------:|:----:|:----:|
+|UIScrollView|[Practice]|-|[스크롤 뷰]|
+|UIAlertController|-|-|-|
+|UITableView|[Practice]|-|[]|
 
 
 > [5주차]
 
 	
-	| Subject | Practice | Apps | Note |
-	|:-------:|:--------:|:----:|:----:|
-	|property|[Practice]|-||
-	|Enumeration|-|[Practice]|[열거형]|
-	|Error Handling|-|-|-|
+| Subject | Practice | Apps | Note |
+|:-------:|:--------:|:----:|:----:|
+|property|[Practice]|-||
+|Enumeration|-|[Practice]|[열거형]|
+|Error Handling|-|-|-|
 
 
 > [7주차]
 
 	
-	| Subject | Practice | Apps | Note |
-	|:-------:|:--------:|:----:|:----:|
-	|Data Saving|[Practice]|[]|[pList로 자료 관리]|
-	|Date|[]|-|[Date, DateFormatter, UIDatePicker]|
-	|Singleton|-|SettingPair|[싱글톤 패턴]|
-	|Notification|[Practice]|-|[노티]|
-	|Closure|[Practice]|-|[클로저]|
-	|JSON|-|-|[JSON]|
+| Subject | Practice | Apps | Note |
+|:-------:|:--------:|:----:|:----:|
+|Data Saving|[Practice]|[]|[pList로 자료 관리]|
+|Date|[]|-|[Date, DateFormatter, UIDatePicker]|
+|Singleton|-|SettingPair|[싱글톤 패턴]|
+|Notification|[Practice]|-|[노티]|
+|Closure|[Practice]|-|[클로저]|
+|JSON|-|-|[JSON]|
 	
 
 > [8주차]
 
 	
-	| Subject | Practice | Apps | Note |
-	|:-------:|:--------:|:----:|:----:|
-	|Timer|[Practice]|-|[타이머, DatePicker]|
-	|Closure|[Practice]|-|[map, filter, reduce]|
-	|Auto Reference Counter|-|-|[메모리 관리]|
-	|UIGestureRecognzer & Animation|[Practice]|-|-|
-	|MapKit|[Practice]|-|-|
+| Subject | Practice | Apps | Note |
+|:-------:|:--------:|:----:|:----:|
+|Timer|[Practice]|-|[타이머, DatePicker]|
+|Closure|[Practice]|-|[map, filter, reduce]|
+|Auto Reference Counter|-|-|[메모리 관리]|
+|UIGestureRecognzer & Animation|[Practice]|-|-|
+|MapKit|[Practice]|-|-|
 
 
 > [9주차]
 
 
-	| Subject | Practice | Apps | Note |
-	|:-------:|:--------:|:----:|:----:|
-	|UICollectionView|[Practice]|-|[콜렉션뷰]|
-	|Thread|[Practice]|-|[쓰레드]|
+| Subject | Practice | Apps | Note |
+|:-------:|:--------:|:----:|:----:|
+|UICollectionView|[Practice]|-|[콜렉션뷰]|
+|Thread|[Practice]|-|[쓰레드]|
 	
