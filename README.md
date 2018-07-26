@@ -7,8 +7,8 @@
 
 * [1주차]
 	
-   >
-        | Subject | Practice | Apps | Note |
+   > 	
+   	| Subject | Practice | Apps | Note |
 	|:-------:|:--------:|:----:|:----:|
 	|Object Oriented Programming|-|-|-|
 	|Variable and Function|[Tuple and Volume]|-|[변수와 함수의 이해]|
