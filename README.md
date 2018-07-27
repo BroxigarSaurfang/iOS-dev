@@ -1,5 +1,6 @@
 # ::: About Me :::
 
+![](https://github.com/BroxigarSaurfang/iOS-dev/blob/master/README/cover.jpg)
 
 # iOS Study
 
