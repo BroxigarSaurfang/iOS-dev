@@ -1,8 +1,8 @@
 # ::: About Me :::
 
-![](https://github.com/BroxigarSaurfang/iOS-dev/blob/master/README/cover1.jpg)
-![](https://github.com/BroxigarSaurfang/iOS-dev/blob/master/README/cover2.jpg)
-![](https://github.com/BroxigarSaurfang/iOS-dev/blob/master/README/cover3.jpg)
+![](https://github.com/BroxigarSaurfang/iOS-dev/blob/master/README/cover1.png)
+![](https://github.com/BroxigarSaurfang/iOS-dev/blob/master/README/cover2.png)
+![](https://github.com/BroxigarSaurfang/iOS-dev/blob/master/README/cover3.png)
 
 
 # Project
