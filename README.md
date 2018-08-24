@@ -8,7 +8,7 @@
 # Project
 
 ![Project_Lusic](https://github.com/LHOCHAN/lusic---looking-for-music)
-![https://github.com/BroxigarSaurfang/iOS-dev/blob/master/README/README_Main.png](https://github.com/LHOCHAN/lusic---looking-for-music)
+![](https://github.com/BroxigarSaurfang/iOS-dev/blob/master/README/README_Main.png)
 
 
 
