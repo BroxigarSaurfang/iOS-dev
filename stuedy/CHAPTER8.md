@@ -445,20 +445,552 @@ s1.value03
 #### 연산 프로퍼티 ( computed property)
 
 * 실제 값을 저장햇다가 반환하지는 않고 대신 다른 프로퍼티의 값을 연산 처리하여 간접적으로 제공
-* 프로퍼티의 값을 참조하기 위해 내부적으로 사용하는 구문이 get 구문
-* 함수와 비슷해서 내부적으로 return 키워드를 사용하여 값을 반환하는데, 여기서 반환되는 값이 프로퍼티가 제공하는 값이된다.
+* 프로퍼티의 값을 참조하기 위해 내부적으로 사용하는 구문이 get 구문, 함수와 비슷해서 내부적으로 return 키워드를 사용하여 값을 반환하는데, 여기서 반환되는 값이 프로퍼티가 제공하는 값이된다.
 * 선택적으로 set 구문을 추가가능, 이는 연산 프로퍼티에 값을 할당하거나 변경하고자 할 때 실행되는 구문
+* set 구문은 선택적이라는 조건이 붙은만큼 생략 가능하지만, 생략시 외부에서 연산 프로퍼티에 값을 할당할 수 없으며, 내부적인 연산 처리를 통해 값을 제공받는 읽기 전용프로퍼티가 생성
+* get 구문은 필수요소, 값을 반환하는 기능 자체를 갖지 못하기 때문에 생략 불가
+* 연산 프로퍼티는 항상 클래스나 구조체 또는 열거형 내부에서만 사용 가능
+
+```
+class/struct/enum 객체명 {
+	...
+	var 프로퍼티명 : 타입 {
+		get {
+		필요한 연산 과정
+		return 반환값
+		}
+		set(매개변수명) {
+		필요한 연산구문
+		}
+	}
+}
+
+// 연산 프로퍼티는 다른 프로퍼티에 의존적이거나, 혹은 특정 연산을 통해 얻을 수 있는
+ 값을 정의 할 때 사용
+ 
+```
+
+```
+import Foundation
+
+struct UserInfo {
+	// 저장프로퍼티 : 태어난 년도
+	
+	var birth :  Int!
+	
+	// 연산 프로퍼티 : 올해가 몇년도인지 계산
+	
+	var thisYear : Int! {
+		get {
+			let df = DateFomatter()
+			df.dataFomatter = "yyyy"
+			return Int(df.string(from: Date()))
+		}
+	}	
+	
+	// 연산 프로퍼티 : 올해 - 태어난 연도 + 1
+	
+	var age : Int {
+		get {
+			return (self.thisYear - self.brith) + 1
+		}
+	}
+}
+
+let info = UserInfo(birth: 1980)
+print(info.age)
+// 37
+		
+```
+
+```
+struct Rect {
+	// 사각형이 위치한 기준 좌표(좌측 상단 기준)
+	var originX : Double = 0.0, originY : Double = 0.0
+	
+	// 가로 세로 길이
+	var sizeWidth : Double = 0.0, sizeHeight : Double = 0.0
+	
+	// 사각형의 X 좌표 중심
+	var centerX : Double {
+		get {
+			return self.originX + (sizeWidth / 2)
+		}
+		set(newCenterX) {
+			originX = newCenterX - (sizeWidth / 2)
+		}
+	}
+	
+	// 사각형의 Y 좌표 중심
+	var centerY : Double {
+		get {
+			return self.originY + (self.sizeHeight / 2)
+		}
+		set(newCenterY) {
+			self.originY = newCenterY - (self.sizeHeight / 2)
+		}
+	}
+}
+
+var square = Rect(originX: 0.0, originY: 0.0, sizeWidth: 10.0, sizeHeight: 10.0)
+print("square.centerX = \(square.centerX), square.centerY =(square.centerY)")
+// square.centerX = 5.0, square.centerY = 5.0
+```
+
+```
+struct Position {
+	var x : Double = 0.0
+	var y : Double = 0.0
+}
+
+struct Size {
+	var x : Double = 0.0
+	var y : Double = 0.0
+}
+
+struct Rect {
+	// 사각형이 위치한 기준 좌표 (좌표 상단 기준)
+	var origin = Position()
+	
+	// 가로 세로 길이
+	var size = Size()
+	
+	// 사각형 X 좌표 중심
+	var center : Position {
+		get {
+			let centerX = self.origin.x + (self.size.width / 2)
+			let centerY = self.origin.y + (self.size.height / 2)
+			return Position(x:centerX, y:centerY)
+		}
+		set(newCenter) {
+			self.origin.x = newCenter.x - (size.width / 2)
+			self.origin.y = newCenter.y - (size.height / 2)
+		}
+	}
+}
+
+let p = Position(x:0.0, y:0.0)
+let s = Size(width:10.0, height:10.0)
+
+var square = Rect(origin:p, size:s)
+print("square.centerX = \(square.center.X), square.centerY = \(square.center.y)")
+
+// square.centerX = 5.0, square.centerY = 5.0
 
 
 
+// 연산 프로퍼티에 값을 할당하면 여기에 정의된 구문이 실행
+프로퍼티에 할당된 값은 set 다음에 오는 괄호의 인자값으로 전달되는데, 이때 인자값의 참조를 위해 매개변수가 사용
+예제에서는 newCenter가 매개변수, 매개변수명이 생략 된다면 newValue라느 기본 인자명이 사용
+매개변수 타입은 연산프로퍼티의 타입으로 정해져 있기 때문에 생략가능
 
 
+square.center = Position(x: 20.0, y: 20.0)
+print("square.x = \(square.origin.x), square.y = \(square.y)")
+
+// square.x = 15.0, square.y = 15.0
+```
+
+* 아이템을 추가하거나 빈 공백이나 nil을 포함해서 임의로 수정할 수 없도록 제약을 가하는 읽기만 가능하고 쓰기는 불가능한 프로퍼티를  read-only 프로퍼티 또는 get-only 프로퍼티라고 한다.
+
+```
+// 연산 프로퍼티는 메소드 형식으로 표현 가능
+연산 프로퍼티의 get 구문이 get 메소드, set 구문이 set 메소드로 대체
+
+struct Rect {
+
+...(중략)...
+
+	func getCenter() -> Position {
+		let centerX = self.origin.x + (self.size.width / 2)
+		let centerY = self.origin.y + (self.size.height / 2)
+		return Position(x: centerX, centerY)
+	}
+	
+	// mutating 키워드는 구조체는 메소드 내에서 프로퍼티를 수정할 수 없는 제약이 있는데, 이 제약을 풀고 메소드 내에서 멤버 변수를 수정하기 위해 사용
+	mutating func setCenter(newCenter: Position) {
+		self.origin.x = newCenter.x - (size.width / 2)
+		self.origin.y = newCenter.y - (size.height / 2)
+	}
+}
+
+```
 
 
+#### 프로퍼티 옵저버 ( Property Observer )
+
+* 특정 프로퍼티를 계속 관찰하고 있다가 프로퍼티의 값이 변경되면 반응
+* 프로퍼티의 값을 직접 변경하거나 시스템에 의해 자동으로 변경하는 경우에 상관없이 프로퍼티의 값이 설정되면 무조건 호출
+* 현재와 동일한 값이 재할당 되더라도 호출
+* 저장 프로퍼티에 값을 대입하는 구문이 수행되거나 연산 프로퍼티에서 set 구문이 실행되는 모든 경우에 옵저버가 호출
+	- willSet 프로퍼티의 값이 변경되기 직전에 호출되는 옵저버
+	- didSet 프로퍼티의 값이 변경되는 직후에 호출되는 옵저버
+
+```
+var <프로퍼티명> : <타입> [ = <초기화> ] {
+	willSet [ (<인자명>) ] {
+		<프로퍼티 값이 변경되기 전에 실행할 내용>
+	}
+}
+
+// willSet 옵저버를 구현해 둔 프로퍼티에 값을 대입하면 그 값이 프로퍼티에 대입되기 직전에 willSet 옵저버 실행
+단, 전달된 값은 참조할 수는 있지만, 상수 형태로 전달하는 값이기 때문에 수정할 수는 없다
+willSet 구현 블록 내에서 사용할 이름을 부여할 수 있는데 이는 선택사항
+이름을 부여하지 않을 때에는 매개상수 이름과 괄호를 모두 생략해주면 된다
+생략시 기본 상수명인 newValue라는 이름으로 전달
+```
+
+```
+var <프로퍼티명> : <타입> [ = <초기값> ] {
+	didSet [ (<인자명>) ] {
+		<프로퍼티 값이 변경된 후에 실행할 내용>
+	}
+}
+
+// 프로퍼티에 값이 할당된 직후에 호출
+새로 할당된 값이 아닌 기존에 저장되어 있던 값이 매개상수 형태로 전달
+생략시 oldValue
+
+* 새로 할당된 값이 필요할때
+* didSet 옵저버가 호출되는 시점은 이미 프로퍼티에 새로운 값이 대입된 후 이기때문에 새로운 값은 이미 프로퍼티에 저장되어 있는 상태, 프로퍼티 자체를 참조하면 된다
+```
+
+```
+struct Job {
+	var income: Int = 0 {
+		willSet(newIncome) {
+			print("이번 달 월급은 \(newIncome)원입니다.")
+		}
+		didSet {
+			if income > oldValue {
+				print("월급이 \(income - oldValue) 원 증가하셨네요. 소득세가 상향조정될 예정입니다")
+				} else {
+					print("저런, 월급이 삭감되셨군요. 그래도 소득세는 깍아드리지 않아요. 알죠?")
+				}
+		}
+	}
+}
+```
 
 
+#### 타입프로퍼티 ( Type Property )
+
+* 클래스 또는 구조체 인스턴스를 생성한 후 이 인스턴스를 통해서만 참조할 수 있는 저장, 연산 프로퍼티는 인스턴스에 관련된 값을 저장하고 다루므로 인스턴스 프로퍼티
+* 타입 프로퍼티는 클래스나 구조체의 인스턴스에 속하는 값이 아니라 클래스나 구조체 자체에 속하는 값이므로 인스턴스를 생성하지 않고 클래스나 구조체 자체에 저장, 저장된 값은 모든 인스턴스가 공통으로 사용가능
+* 인스턴스 프로퍼티는 개별 인스턴스마다 다른 값을 저장할 수 있어서 하나의 인스턴스에서 변경한 프로퍼티의 값은 그 인스턴스 내에서만 유지 나머지 인스턴스에 영향없음
+* 타입 프로퍼티는 인스턴스가 아무리 많더라도 모든 인스턴스가 하나의 값을 공용으로 사용
+* 복사된 값이 아니라 실제로 하나의 값이므로 하나의 인스턴스에서 타입 프로퍼티의 값을 변경시 나머지 인스턴스들이 변경된 값을 일괄 적용받는다
+* 클래스나 구조체, 열거형 객체 내에서 선언하는 것이므로 선언된 객체 내에서만 접근 가능한 범위를 가진다
+
+```
+static let/var 프로퍼티명 = 초기값
+
+or 
+
+class let/var 프로퍼티명 : 타입 {
+	get {
+		return 반환값
+	}
+	set {
+	}
+}
+
+// 타입 프로퍼티로 사용할 프로퍼티 앞에 static 키웜드만 추가해주면 된다
+static 키워드는 구조체나 클래스에 관계없이 저장, 연산 프로퍼티에 모두 사용 가능
+class 키워드는 클래스에서 연산 프로퍼티에만 붙일 수 있는 키워드
+class 키워드르 사용하여 타입 프로퍼티를 선언하면 상속받은 하위 클래스에서 재정의(Override)할 수 있는 타입 프로퍼티가 된다
+```
+
+```
+// 변수나 상수 어느 것이든 타입 프로퍼티로 사용할 수 있지만, 이를 이용하여 정의한 저장 프로퍼티를 타입 프로퍼티로 선언할 때는 초기값을 반드시 할당해야 한다.
+
+struct Foo {
+	// 타입 저장 프로퍼티
+	static var sFoo = "구조체 타입 프로퍼티값"
+	
+	// 타입 연산 프로퍼티
+	static var cFoo : Int {
+		return 1
+	}
+}
+
+class Boo {
+	// 타입 저장 프로퍼티
+	static var sFoo = "클래스 타입 프로퍼티값"
+	
+	// 타입 연산 프로퍼티
+	static var cFoo : Int {
+		return 10
+	}
+	
+	// 재정의가 가능한 타입 연산 프로퍼티
+	class var oFoo : Int {
+		return 100
+	}
+}
+
+// class 키워드를 사용하여 정의한 oFoo는 Boo 클래스를 상속받는 하위 클래스에서 재정의할 수 있는 타입 프로퍼티라는 점이 cFoo와 차이점
+
+print(Foo.sFoo)
+// "구조체 타입 프로퍼티값"
+
+Foo.sFoo = "새로운 값"
+print(Foo.sFoo)
+// "새로운 값"
+
+print(Boo.sFoo)
+// "클래스 타입 프로퍼티 값"
+
+print(Boo.cFoo)
+//10
+
+// 타입 프로퍼티는 인스턴스에 속하지 않는 값이므로 만약 인스턴스를 생성한 다음 점 구문을 이용하여 타입 프로퍼티를 읽으려고 하면 선언되지 않은 프로퍼티라는 오류가 발생.
+타입 프로퍼티는 반드시 클래스나 구조체, 또는 열거형 자체와 함께 사용 해야 한다
+
+```
 
 
+### 메소드 ( Method )
+
+* 클래스나 구조체, 열거형과 같은 객체 내에서 함수가 선언 될 경우 이를 메소드라고 통칭
+* 특정 타입의 객체 내부에서 사용하는 함수
+* 함수는 독립적인 기능을 구현하기 위해 만들어지는 것
+* 메소드는 하나의 객체 내에 정의도니 다른 메소드들과 서로 협력하여 함수적인 기능을 수행
+
+* 인스턴스 메소드 ( Instance Method ) - 객체의 인스턴스를 생성해야 사용할 수 있는 메소드, 주어진 객체의 인스턴스와 함께 특수한 임무나 함수적인 기능을 수행하도록 갭슐화된 메소드
+* 타입 메소드 ( Type Method ) - 객체 인스턴스를 생성하지 않아도 사용할 수 있는 메소드, 객체 타입 자체에 관련된 메소드
 
 
+#### 인스턴스 메소드 ( Instance Method )
 
+* 클래스, 구조체 또는 열거형과 같은 객체 타입이 만들어내는 인스턴스에 소속된 함수
+* 인스턴스 프로퍼티에 접근하거나 수정하는 방법을 제공하거나 인스턴스의 생성 목적에 따른 함수적 관계성을 제공하는 등 객체의 인스턴스에 대한 기능적 측면을 제공
+* 인스턴스 메소드는 객체 타입 내부에 선언된다는 점을 제외 하고는 일반 함수와 선언하는 형식이 완전히 동일
+* 인스턴스 메소드는 같은 객체 내에서 정의되는 같은 인스턴스 메소드나 인스턴스 프로퍼티에 접근할 수 있도록 권한이 부여되며, 해당 메소드가 속한 인스턴스를 통해서만 호출될 수 있다.
+
+```
+struct Resolution {
+	var width = 0
+	var height = 0
+	
+	
+	// 구조체의 요약된 설명을 리턴해주는 인스턴스 메소드
+	func desc() -> String {
+		let desc = "이 해상도는 가로 \(slef.width) X \(self.height) 로 구성됩니다."
+	}
+}
+
+class VideoMode {
+	var resolution = Resolution()
+	var interlaced = false
+	var frameRate = 0.0
+	var name : String?
+	
+	// 클래스의 요약된 설명을 리턴해주는 인스턴스 메소드
+	func desc() -> String {
+		if self.name != nil {
+			let desc = "이 \(self.name!) 비디오 모드는 \(self.frameRate)의 프레임 비율로 표시됩니다."
+		} else {
+			let desc = "이 비디오 모드는 \(self.frameRate)의 프레임 비율로 표시됩니다."
+			return desc
+		}
+	}
+}
+
+// 클래스의 멥버인 메소드이자 인스턴스 메소드인 desc()는 일반 함수와 다음과 차이점이 있다.
+1. 구조체와 클래스의 인스턴스에 소속된다는 점
+2. 메소드 내에서 정의된 변수와 상수뿐만 아니라 클래스 범위에서 정의된 프로퍼티도 모두 참조할 수 있다는 점
+3. self 키워드를 사용할 수 있다는 점
+
+```
+
+```
+self.프로퍼티명
+
+// self.키워드는 클래스나 구조체 자신을 가리킨다.
+정확히는 클래스나 구조체의 인스턴스의 자신을 가리킨다 라고 할 수있다.
+self 키워드와 프로퍼티 이름을 구분해주는 점(.)은 일종의 소속 연산자로서 '~의'라는 소속의 의미를 나타낸다.
+self 키워드 뒤에 오는 프로퍼티명은 클래스나 구조체의 멤버로 선언된 프로퍼티 라는 뜻
+
+
+var res = Resolution()
+res.width
+
+원래대로라면 width는 인스턴스 프로퍼티이므로 다음과 같이 인스턴스를 통해서만 값에 접근
+하지만 인스턴스는 클래스 외부에서 접근할 수 있을 뿐, 클래스 내부에서는 어느 인스턴스에 할당된 것인지에 대한 정보를 정확히 알 수가 없기 때문에 self 키워드를 사용
+하지만 메소드 내부에 동일한 이름을 가진 변수나 상수가 선언되어있지 않을 경우 생략 가능하다
+self 가 붙은 변수는 프로퍼티로, 붙지않은 변수는 일반 변수로 판단
+
+struct Resolution {
+	var width = 0
+	var heigth = 0
+	
+	func judge() -> Bool {
+		let width = 30
+		return self.width == width
+	} // false
+} 
+
+```
+
+```
+class Counter {
+	
+	// 카운트를 저장할 프로퍼티
+	var count = 0
+	
+	// 카운트를 1 증가
+	func increment() {
+		self.count += 1
+	}
+	
+	//입력된 값만큼 카운트를 증가
+	func incrementBy(amount:Int) {
+		self.count += amount
+	}
+	
+	// 카운트를 0으로 초기화
+	func reset() {
+		self.count = 0
+	}
+}
+
+
+// Counter 클래스의 인스턴스를 생성. 초기 카운터 값은 0
+let counter = Counter()
+
+// 카운터 값을 증가. 이제 카운터 값은 1
+counter.increment()
+
+// 카운터 값을 5만큼 증가. 이제 카운터 값은 6
+counter.incrementBy(amount: 5)
+
+// 카운터 값을 초기화. 이제 카운터 값은 0
+counter.reset()
+
+```
+
+```
+struct Point {
+	var x = 0.0, y = 0.0
+	mutating func moveByX(x deltaX: Double, y: deltaY: Double) {
+		self.x += deltaX
+		self.y += deltaY
+	}
+}
+
+var point = Point(x: 10.5, y: 12.0)
+point.moveByX(x: 3.0, y: 4.5)
+print("이제 새로운 좌표는 (\(point.x), \(point.y))입니다")
+
+// 이제 새로운 좌표는 (13.5, 16.5)입니다
+
+class Location {
+	var x = 0.0, y = 0.0
+	func moveByX(x deltaX: Double, y: deltaY: Double) {
+		self.x += deltaX
+		self.y += deltaY
+	}
+}
+
+var loc = Location()
+loc.x = 10.5
+loc.y = 12.0
+loc,moveByX(x: 3.0, y: 4.5)
+print("이제 새로운 좌표는 (\(loc.x), \(loc.y))입니다")
+
+// 이제 새로운 좌표는 (13.5, 16.5)입니다
+
+// 구조체나 열거형의 인스턴스 메소드 내부에서 프로퍼티의 값을 수정할 때는 반드시 mutating 키워드를 추가해야 한다.
+구조체나 열거형 인스턴스를 상수로 할당받으면 mutating 메소드를 호출할 수 없다
+클래스 인스턴스 메소드에서는 프로퍼티를 인스턴스 내의 프로퍼티를 원하는 대로 수정 가능
+```
+
+### 타입 메소드 ( Type Method )
+
+* 객체 타입 자체에서 호출
+* 인스턴스를 생성하지 않고 클래스나 구조체 자체에서 호출할 수 있는 메소드
+* 구조체나 열거형, 클래스 모두 타입 메소드를 선언할 때는 static 키워드를 사용
+* 하위 클래스에서 재정의 가능한 타입 메소드를 선언할 때는 class 키워드를 사용
+* static, class 키워드는 클래스 타입에서만 사용 가능
+* 선언된 타입 메소드를 호출할 때는 점 구문 이용
+
+```
+class Foo {
+	// 타입 메소드 선언
+	class func fooTypeMethod() {
+		// 타입 메소드의 구현 내용이 여기에 들어간다
+	}
+}
+
+let f = Foo()
+f.fooTypeMethod() // 오류
+Foo.fooTypeMethod()
+```
+
+* 인스턴스 메소드는 메소드의 동작 범위가 인스턴스 내부로 제한되기 때문에 두 개의 인스턴스를 생성하여 메소드를 실행하면 메소드에 의해 값이 변하더라도 해당 인스턴스에만 국한되어 값이 변하고 나머지 인스턴스에는 영향을 미치지 않는다. 그러나 타입 메소드는 객체 타입 전체에 영향을 준다.
+* 타입 메소드 자체에 인스턴스가 존재하지 않기 때문에 타입 메소드에서는 인스턴스 프로퍼티를 참조할 수 없다.
+* 타입 메소드에서 사용할수 있는 프로퍼티는 오직 타입 프로퍼티
+
+
+### 상속 ( Inheritance )
+
+* 한 클래스가 다른 클래스에서 정의된 프로퍼티나 메소드를 물려받아 사용하는 것
+* 상속을 사용하면 이미 만들어진 다른 클래스의 기능이나 프로퍼티를 직접 구현하지 않고도 사용 가능
+* 추가로 필요한 기능이나 프로퍼티만 정의하여 사용
+* 이때 기능이나 프로퍼티를 물려주는 클래스와 이를 상속받는 클래스 사이에서는 다음과 같은 관계가 성립
+	- 프로퍼티와 메소드를 물려준 클래스는 부모 클래스, 상위 클래스 또는 슈퍼 클래스, 기본 클래스
+	- 프로퍼티와 메소드를 물려받은 클래스는 자식 클래스, 하위 클래스 또는 서브 클래스, 파생 클래스
+
+
+```
+// 어떤 클래스도 상속받지 않는 클래스를 기본 클래스
+
+class A {
+	var name = "Class A"
+	
+	var description : String {
+		return "This class nameis \(self.name)"
+	}
+	
+	func foo() {
+		print("\(self.nema)'s method foo is called")
+	}
+}
+
+let a = A()
+
+a.name // "Class A"
+a.description // "This class name is Class A"
+a.foo()
+
+// Class A's method foo is called
+```
+
+#### 서브클래싱 ( Subclassing )
+
+* 기존에 있는 클래스를 기반으로 하여 새로운 클래스를 작성하는 과정
+
+```
+class <클래스 이름> : <부모 클래스> {
+	// 추가로 구현할 내용
+}
+```
+
+* 주의할점은 하나의 클래스만 상속 받을 수 있다.
+* 다중 상속에서 발생하는 메소드나 프로퍼티의 중첩 및 충돌을 방지하기 위함
+
+```
+class B : A {
+
+	var prop = "Class B"
+	
+	func boo() -> String {
+		return "Class B prop = \(self.prop)"
+	}
+}
+
+let b = B()
+b.prop // "Class B"
+b.boo  // Class B prop = Class B
+```
